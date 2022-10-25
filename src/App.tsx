@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     
-    fetch("https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyBHlVhXIi8VCGP3NlsURBWOwPZGkvKsJPI", {
+    fetch("https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&key=AIzaSyBHlVhXIi8VCGP3NlsURBWOwPZGkvKsJPI", {
         method: 'GET',
         redirect: 'follow'
       })
