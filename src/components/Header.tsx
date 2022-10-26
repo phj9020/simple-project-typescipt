@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import React from 'react';
 
 const HeaderContainer = styled.div`
 `
@@ -35,15 +36,28 @@ const SubmitInput = styled.input`
     cursor: pointer;
 `
 
-function Header() {
+type HeaderProp = {
+    onSearch: (arg: string) => void;
+}
+
+function Header({onSearch} : HeaderProp) {
+    const [query, setQuery] = React.useState<string>("");
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); 
+        onSearch(query);
+        
+    }
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.currentTarget.value);
+    }
     return (
         <HeaderContainer>
             <Nav>
                 <img src="/images/logo.png" alt="logo" />
                 <h1>Youtube</h1>
-                <SearchForm>
-                    <SearchInput type="text" placeholder='검색어를 입력해주세요.' />
-                    <SubmitInput type="button" value="검색" />
+                <SearchForm onSubmit={handleSubmit}>
+                    <SearchInput type="text" placeholder='검색어를 입력해주세요.' onChange={handleSearch} value={query} />
+                    <SubmitInput type="submit" value="검색" />
                 </SearchForm>
             </Nav>
         </HeaderContainer>
