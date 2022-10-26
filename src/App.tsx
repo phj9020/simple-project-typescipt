@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     
-    fetch("https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&key=AIzaSyBHlVhXIi8VCGP3NlsURBWOwPZGkvKsJPI", {
+    fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=50&key=${process.env.REACT_APP_KEY}`, {
         method: 'GET',
         redirect: 'follow'
       })
@@ -62,10 +62,11 @@ function App() {
     
   }, []);
 
+ 
 
 // VideoEntity의 id 형태가 popular api에서는 string 이지만 search api로 오는 id 는 object인 문제 => id 값을 item.id.videoId 로 덮어줌   
   const onSearch = (arg: string) => {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${arg}&type=video&key=AIzaSyBHlVhXIi8VCGP3NlsURBWOwPZGkvKsJPI`, {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${arg}&type=video&key=${process.env.REACT_APP_KEY}`, {
                 method: 'GET',
                 redirect: 'follow'
             })
