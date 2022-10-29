@@ -42,17 +42,18 @@ const TextThumbnail = styled.div`
 `
 
 type VideoItemProp = {
-    video: VideoEntity
+    video: VideoEntity,
+    onVideoSelect: (video: VideoEntity)=> void,
 }
 
 // 비디오카드
 
-function VideoItem({ video }: VideoItemProp) {
+function VideoItem({ video, onVideoSelect }: VideoItemProp) {
     const { snippet: { thumbnails, title, channelTitle } } = video;
-    
+
     return (
-        <Thumbnail>
-            <ImageThumbnail src={thumbnails.medium.url} alt="thumbnail" />
+        <Thumbnail onClick={() => onVideoSelect(video)}>
+            <ImageThumbnail src={thumbnails.medium.url} alt={title} />
             <TextThumbnail>
                 <h3>{title}</h3>
                 <p>{channelTitle}</p>

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import Header from './components/Header';
+import VideoDetail from './components/VideoDetail/VideoDetail';
 import VideoList from './components/VideoList';
 import Youtube from './service/youtube';
 
 
+
 export type VideoEntity = {
   etag: string,
-  id: string & {kind: string, videoId: string},
+  id: string & { kind: string, videoId: string },
   kind: string,
   snippet: {
     categoryId: string,
@@ -52,8 +54,13 @@ type AppProps = {
   youtube: Youtube;
 }
 
-function App({youtube} : AppProps) {
+function App({ youtube }: AppProps) {
   const [videos, setVideos] = React.useState<VideosCollection>([]);
+  const [selected, setSelected] = React.useState(null);
+  console.log(selected)
+  const selectVideo = (video: any) => {
+    setSelected(video);
+  }
 
   useEffect(() => {
     // youtube.getMostPopular().then(items => setVideos(items))
@@ -73,7 +80,12 @@ function App({youtube} : AppProps) {
   return (
     <div>
       <Header onSearch={onSearch} />
-      <VideoList videos={ videos } />
+      {selected ?
+          <VideoDetail video={selected} videos={videos} onVideoSelect={selectVideo} />
+        :
+        <VideoList videos={videos} onVideoSelect={selectVideo} />
+      }
+
     </div>
   );
 }

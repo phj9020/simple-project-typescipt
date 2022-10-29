@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { VideosCollection } from '../App';
+import { VideoEntity, VideosCollection } from '../App';
 import VideoItem from './VideoItem';
 
 const breakpoints = [700, 1200, 1500, 1920];
@@ -35,15 +35,16 @@ const ListBox = styled.ul`
 
 
 type VideoListProps = {
-    videos: VideosCollection
+    videos: VideosCollection,
+    onVideoSelect: (video: VideoEntity) => void,
 }
 
-function VideoList({ videos }: VideoListProps) {
-    console.log(videos)
+function VideoList({ videos, onVideoSelect }: VideoListProps) {
+
     return (
         <Container>
             <ListBox>
-                {videos.map(video => <VideoItem key={video.id} video={video} />)}
+                {videos.map(video => <VideoItem key={video.id} video={video} onVideoSelect={onVideoSelect}  />)}
             </ListBox>
         </Container>
     )
