@@ -50,6 +50,7 @@ function VideoDetail({ video, videos, onVideoSelect }: VideoDetailProp) {
             <Left>
                 <VideoSection>
                     <iframe
+                        title={video.snippet.channelTitle}
                         width="100%"
                         height="686px"
                         src={`http://www.youtube.com/embed/${video.id}`}
@@ -58,6 +59,7 @@ function VideoDetail({ video, videos, onVideoSelect }: VideoDetailProp) {
                 </VideoSection>
                 <VideoOverview>
                     <h3>{video.snippet.title}</h3>
+                    <h4>{video.snippet.channelTitle}</h4>
                     <p>{video.snippet.description}</p>
                 </VideoOverview>
             </Left>

@@ -9,7 +9,7 @@ type VideoListProp = {
 function VideoSideList({ videos, onVideoSelect }: VideoListProp) {
     return (
         <div>
-            {videos.map(video => <VideoSideItem video={video} onVideoSelect={onVideoSelect} />)}
+            {videos.map(video => <VideoSideItem key={video.id} video={video} onVideoSelect={onVideoSelect} />)}
         </div>
     )
 }

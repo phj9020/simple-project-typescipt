@@ -60,6 +60,7 @@ function App({ youtube }: AppProps) {
   console.log(selected)
   const selectVideo = (video: any) => {
     setSelected(video);
+    window.scrollTo(0, 0);
   }
 
   useEffect(() => {
@@ -72,8 +73,11 @@ function App({ youtube }: AppProps) {
   }, [youtube]);
 
 
-  const onSearch = (arg: string) => {
-    youtube.getSearch(arg).then(items => setVideos(items));
+  const onSearch = async (arg: string) => {
+    setSelected(null);
+    const searchVideos = await youtube.getSearch(arg);
+    setVideos(searchVideos);
+    // youtube.getSearch(arg).then(items => setVideos(items));
   }
 
 
