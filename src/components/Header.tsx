@@ -64,4 +64,4 @@ function Header({onSearch} : HeaderProp) {
     )
 }
 
-export default Header
+export default React.memo(Header);

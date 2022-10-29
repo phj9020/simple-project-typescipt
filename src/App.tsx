@@ -57,7 +57,7 @@ type AppProps = {
 function App({ youtube }: AppProps) {
   const [videos, setVideos] = React.useState<VideosCollection>([]);
   const [selected, setSelected] = React.useState(null);
-  console.log(selected)
+
   const selectVideo = (video: any) => {
     setSelected(video);
     window.scrollTo(0, 0);
@@ -73,19 +73,19 @@ function App({ youtube }: AppProps) {
   }, [youtube]);
 
 
-  const onSearch = async (arg: string) => {
+  const onSearch = React.useCallback(async (arg: string) => {
     setSelected(null);
     const searchVideos = await youtube.getSearch(arg);
     setVideos(searchVideos);
     // youtube.getSearch(arg).then(items => setVideos(items));
-  }
+  }, [youtube]);
 
 
   return (
     <div>
       <Header onSearch={onSearch} />
       {selected ?
-          <VideoDetail video={selected} videos={videos} onVideoSelect={selectVideo} />
+        <VideoDetail video={selected} videos={videos} onVideoSelect={selectVideo} />
         :
         <VideoList videos={videos} onVideoSelect={selectVideo} />
       }
